@@ -22,7 +22,7 @@ interface Translations {
 
 const translations: Translations = {
   tr: {
-    title: "Tarama Ölçeği",
+    title: "DEHB Şiddeti",
     showResults: "Sonucu Göster",
     totalScore: "Toplam Puan",
     riskLevels: {
@@ -38,7 +38,7 @@ const translations: Translations = {
     }
   },
   en: {
-    title: "Screening Scale",
+    title: "ADHD Intensity",
     showResults: "Show Results",
     totalScore: "Total Score",
     riskLevels: {
@@ -54,7 +54,7 @@ const translations: Translations = {
     }
   },
   de: {
-    title: "Screening-Skala",
+    title: "DEHB Intensity",
     showResults: "Ergebnisse anzeigen",
     totalScore: "Gesamtpunktzahl",
     riskLevels: {

@@ -13,7 +13,7 @@ export default function MainMenu() {
         </Link>
         <Link href="/(screens)/screening" asChild>
           <TouchableOpacity style={styles.menuButton}>
-            <Text style={styles.buttonText}>Tarama Ölçeği</Text>
+            <Text style={styles.buttonText}>DEHB Şiddeti</Text>
           </TouchableOpacity>
         </Link>
       </View>
