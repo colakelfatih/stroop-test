@@ -295,6 +295,12 @@ export default function ScreeningScale() {
         <View style={styles.resultContainer}>
           <Text style={styles.resultText}>{translations[language].totalScore}: {calculateScore()}</Text>
           <Text style={styles.resultText}>
+          {/* // @todo: 1-9 dikkatsizlik
+          // @todo: 10-15 hiperaktivite
+          // @todo: 16-18 dürtüsellik
+          // @todo: 19-26 kokgb
+          // @todo: 27-41 davranım bozukluğu */}
+   
             {calculateScore() < 20 ? translations[language].riskLevels.low :
              calculateScore() < 40 ? translations[language].riskLevels.medium :
              translations[language].riskLevels.high}
