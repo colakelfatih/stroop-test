@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable, Share } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Platform } from 'react-native';
 import { useStroop } from '../context/StroopContext';
 import { useRouter } from 'expo-router';
 import { useLanguage } from '../context/LanguageContext';
@@ -28,36 +28,60 @@ export default function SummaryScreen() {
   const totalErrors = Object.values(screenData).reduce((sum, data) => sum + data.errors, 0);
   const totalTime = Object.values(screenData).reduce((sum, data) => sum + data.time, 0);
 
-  const exportToExcel = async () => {
-    try {
-      // Excel başlıkları
-      const headers = [
-        t('screen'),
-        t('time'),
-        t('corrections'),
-        t('errors')
+  // CSV içeriği oluştur
+  const createCsvContent = () => {
+    // Excel başlıkları
+    const headers = [
+      t('screen'),
+      t('time'),
+      t('corrections'),
+      t('errors')
+    ].join('\t');
+
+    // Her ekran için verileri topla
+    const rows = Object.entries(screenData).map(([screen, data]) => {
+      return [
+        screen,
+        data.time || 0,
+        data.corrections || 0,
+        data.errors || 0
       ].join('\t');
+    });
 
-      // Her ekran için verileri topla
-      const rows = Object.entries(screenData).map(([screen, data]) => {
-        return [
-          screen,
-          data.time || 0,
-          data.corrections || 0,
-          data.errors || 0
-        ].join('\t');
-      });
+    // Tüm verileri birleştir
+    return [headers, ...rows].join('\n');
+  };
 
-      // Tüm verileri birleştir
-      const csvContent = [headers, ...rows].join('\n');
-
-      // Dosyayı paylaş
-      await Share.share({
-        message: csvContent,
-        title: 'Stroop Test Results',
-      });
+  // Web için Excel dışa aktarma
+  const exportToExcelWeb = () => {
+    try {
+      const csvContent = createCsvContent();
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'stroop_test_results.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
-      console.error('Error exporting to Excel:', error);
+      console.error('Error exporting to Excel (Web):', error);
+      alert(`Export error: ${error.message}`);
+    }
+  };
+
+  // Mobil için Excel dışa aktarma - bu fonksiyon şu an için sadece bir uyarı gösterir
+  const exportToExcelMobile = () => {
+    alert('Excel export is only available in the web version');
+  };
+
+  // Platform'a göre doğru fonksiyonu çağır
+  const handleExportToExcel = () => {
+    // Web platformunda olup olmadığını kontrol et
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      exportToExcelWeb();
+    } else {
+      exportToExcelMobile();
     }
   };
 
@@ -105,9 +129,12 @@ export default function SummaryScreen() {
         <Text style={styles.buttonText}>{t('startNewTest')}</Text>
       </Pressable>
 
-      <Pressable style={styles.exportButton} onPress={exportToExcel}>
-        <Text style={styles.buttonText}>{t('exportToExcel')}</Text>
-      </Pressable>
+      {/* Web platformunda olup olmadığını kontrol eden koşullu buton render */}
+      {typeof window !== 'undefined' && typeof document !== 'undefined' ? (
+        <Pressable style={styles.exportButton} onPress={handleExportToExcel}>
+          <Text style={styles.buttonText}>{t('exportToExcel')}</Text>
+        </Pressable>
+      ) : null}
     </ScrollView>
   );
 }
