@@ -42,7 +42,7 @@ Bu proje, Stroop Testi ve DEHB (Dikkat Eksikliği ve Hiperaktivite Bozukluğu) �
 
 1. **Depoyu klonlayın:**
    ```bash
-   git clone https://github.com/kullanici/stroop.git
+   git clone https://github.com/colakelfatih/stroop.git
    cd stroop
    ```
 
@@ -53,7 +53,7 @@ Bu proje, Stroop Testi ve DEHB (Dikkat Eksikliği ve Hiperaktivite Bozukluğu) �
 
 3. **Projeyi başlatın:**
    ```bash
-   npm start
+   npm run start
    ```
 
 ---
