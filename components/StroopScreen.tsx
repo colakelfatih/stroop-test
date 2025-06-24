@@ -87,7 +87,6 @@ export default function StroopScreen({ screenNumber, nextScreen, title, customCo
 
   return (
     <ScrollView style={styles.container}>
-      <LanguageSwitcher />
       
       <Text style={styles.title}>{`${t('screenTitle')} ${screenNumber}`}</Text>
       
