@@ -1,50 +1,81 @@
-# Welcome to your Expo app 👋
+# Stroop Test Uygulaması
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bu proje, Stroop Testi ve DEHB (Dikkat Eksikliği ve Hiperaktivite Bozukluğu) şiddetini ölçmeye yönelik modern ve kullanıcı dostu bir mobil/web uygulamasıdır.
 
-## Get started
+## Özellikler
 
-1. Install dependencies
+- **Stroop Testi**: Kullanıcıya renk isimlerini ve renkli kelimeleri hızlı ve doğru şekilde okuma görevi verir.
+- **DEHB Şiddeti Ölçümü**: Kullanıcıdan alınan verilere göre DEHB şiddetini değerlendiren bir modül içerir.
+- **Çoklu Dil Desteği**: Türkçe ve İngilizce başta olmak üzere çoklu dil desteği.
+- **Zamanlayıcı ve Hata Takibi**: Test sırasında süreyi ve yapılan hataları kolayca takip edebilirsiniz.
+- **Modern ve Basit Arayüz**: Kullanıcı dostu, sade ve anlaşılır bir tasarım.
 
+---
+
+## Ekran Görüntüleri
+
+### Ana Menü
+
+![Ana Menü](assets/images/readme-menu.png)
+
+> Uygulama açıldığında kullanıcıyı karşılayan ana menü. Buradan Stroop Testi veya DEHB Şiddeti modüllerine geçiş yapılabilir.
+
+---
+
+### Stroop Testi - Başlangıç
+
+![Stroop Testi Başlangıç](assets/images/readme-screen1.png)
+
+> Test başlamadan önce kullanıcıya yönergeler ve test içeriği sunulur. Dil seçimi yapılabilir.
+
+---
+
+### Stroop Testi - Zamanlayıcı Aktif
+
+![Stroop Testi Zamanlayıcı](assets/images/readme-screen2.png)
+
+> Test sırasında zamanlayıcı çalışır, kullanıcı hatalarını ve düzeltmelerini kolayca kaydedebilir. Testi duraklatma veya bitirme seçenekleri mevcuttur.
+
+---
+
+## Kurulum
+
+1. **Depoyu klonlayın:**
+   ```bash
+   git clone https://github.com/kullanici/stroop.git
+   cd stroop
+   ```
+
+2. **Bağımlılıkları yükleyin:**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. **Projeyi başlatın:**
    ```bash
-    npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Kullanılan Teknolojiler
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- React / React Native
+- TypeScript
+- Expo
+- Context API (Çoklu dil ve tema yönetimi)
+- Modern UI/UX tasarımı
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## Katkıda Bulunmak
 
-```bash
-npm run reset-project
-```
+Katkılarınızı memnuniyetle karşılıyoruz! Lütfen bir pull request açmadan önce bir issue oluşturun.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## Lisans
 
-To learn more about developing your project with Expo, look at the following resources:
+Bu proje MIT lisansı ile lisanslanmıştır.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
