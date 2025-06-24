@@ -10,8 +10,17 @@ export default function SummaryScreen() {
   const { t } = useLanguage();
   const router = useRouter();
 
-  // Format time as mm:ss:ms
+  // Format time as mm:ss:ms for display
   const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60000);
+    const seconds = Math.floor((time % 60000) / 1000);
+    const milliseconds = Math.floor((time % 1000) / 10);
+
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`;
+  };
+  
+  // Format time as 00:01.35 for Excel export
+  const formatTimeForExcel = (time: number) => {
     const minutes = Math.floor(time / 60000);
     const seconds = Math.floor((time % 60000) / 1000);
     const milliseconds = Math.floor((time % 1000) / 10);
@@ -42,14 +51,22 @@ export default function SummaryScreen() {
     const rows = Object.entries(screenData).map(([screen, data]) => {
       return [
         screen,
-        data.time || 0,
+        formatTimeForExcel(data.time || 0), // Süreyi formatlı şekilde ekle
         data.corrections || 0,
         data.errors || 0
       ].join('\t');
     });
-
+    
+    // Toplam satırını ekle
+    const totalRow = [
+      'Total',
+      formatTimeForExcel(totalTime),
+      totalCorrections,
+      totalErrors
+    ].join('\t');
+    
     // Tüm verileri birleştir
-    return [headers, ...rows].join('\n');
+    return [headers, ...rows, totalRow].join('\n');
   };
 
   // Web için Excel dışa aktarma

@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useState, ReactNode } from 'react';
+import { Alert, Pressable, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { useLanguage } from '../app/context/LanguageContext';
 import { useStroop } from '../app/context/StroopContext';
 import Chronometer from './Chronometer';
@@ -10,9 +10,10 @@ interface StroopScreenProps {
   screenNumber: number;
   nextScreen: string;
   title: string;
+  customContent?: ReactNode;
 }
 
-export default function StroopScreen({ screenNumber, nextScreen, title }: StroopScreenProps) {
+export default function StroopScreen({ screenNumber, nextScreen, title, customContent }: StroopScreenProps) {
   const [chronometerActive, setChronometerActive] = useState(false);
   const [corrections, setCorrections] = useState(0);
   const [errors, setErrors] = useState(0);
@@ -85,10 +86,13 @@ export default function StroopScreen({ screenNumber, nextScreen, title }: Stroop
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <LanguageSwitcher />
       
       <Text style={styles.title}>{`${t('screenTitle')} ${screenNumber}`}</Text>
+      
+      {/* Özel içerik */}
+      {customContent}
       
       <View style={styles.chronometerContainer}>
         <Chronometer isActive={chronometerActive} onTimeUpdate={handleTimeUpdate} />
@@ -177,29 +181,31 @@ export default function StroopScreen({ screenNumber, nextScreen, title }: Stroop
           </Pressable>
         )}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: '#f5f5f5',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginVertical: 20,
+    paddingHorizontal: 20,
   },
   chronometerContainer: {
     marginVertical: 20,
+    paddingHorizontal: 20,
   },
   inputsContainer: {
     marginVertical: 20,
     backgroundColor: '#fff',
     padding: 15,
+    marginHorizontal: 20,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -240,6 +246,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 20,
+    marginBottom: 40,
+    paddingHorizontal: 20,
   },
   button: {
     backgroundColor: '#3498db',
@@ -247,37 +255,33 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginHorizontal: 5,
-    width: '50%',
+    width: '45%',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  startButton: {
+    backgroundColor: '#2ecc71',
+    width: '80%',
+  },
+  pauseButton: {
+    backgroundColor: '#e74c3c',
+  },
+  resumeButton: {
+    backgroundColor: '#3498db',
+  },
+  completeButton: {
+    backgroundColor: '#f39c12',
+  },
+  disabledButton: {
+    opacity: 0.5,
   },
   incrementButton: {
     width: 40,
     height: 40,
-    paddingVertical: 0,
+    borderRadius: 20,
     justifyContent: 'center',
-  },
-  disabledButton: {
-    backgroundColor: '#bdc3c7',
-    opacity: 0.7,
-  },
-  startButton: {
-    width: '50%',
-    backgroundColor: '#2ecc71',
-  },
-  pauseButton: {
-    width: '50%',
-    backgroundColor: '#e74c3c',
-  },
-  resumeButton: {
-    width: '50%',
-    backgroundColor: '#2ecc71',
-  },
-  completeButton: {
-    width: '50%',
-    backgroundColor: '#f39c12',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
   },
 }); 

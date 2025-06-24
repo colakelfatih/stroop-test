@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import StroopScreen from '../../components/StroopScreen';
 
 export default function Screen4() {
@@ -6,7 +7,39 @@ export default function Screen4() {
     <StroopScreen 
       screenNumber={4} 
       nextScreen="/(screens)/screen5" 
-      title="Stroop Test - Screen 4" 
+      title="Stroop Test - Screen 4"
+      customContent={
+        <View style={styles.contentContainer}>
+          <Text style={styles.contentTitle}>Bölüm IV: Renk İsmi Olmayan Kelime Rengi Söyleme</Text>
+          <Image 
+            source={require('../../assets/images/stroop4.png')} 
+            style={styles.image}
+            resizeMode="contain"
+          />
+        </View>
+      }
     />
   );
-} 
+}
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginVertical: 10,
+    paddingHorizontal: 20,
+  },
+  contentTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 15,
+    color: '#333',
+  },
+  image: {
+    width: '100%',
+    height: 300,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+  }
+}); 
