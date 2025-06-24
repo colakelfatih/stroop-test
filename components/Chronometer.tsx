@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timerText: {
-    fontSize: 48,
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#2c3e50',
     fontFamily: 'monospace',
